@@ -1,0 +1,123 @@
+/* variable couleur */
+:root {
+    --colorTheme1:#CE6A6B;
+    --colorTheme2:#212E53;
+    --colorTheme3:whitesmoke;
+    --colorTheme4:#4A919E;
+    
+}
+
+/* div  */
+div.main{
+	margin: auto;
+	width: 700px;height: 600px;background-color: whitesmoke;text-align: center;
+	border:solid;border-width: 3px;border-radius: 20px;box-shadow: 5px 5px 5px var(--colorTheme1);
+	border-left-color:var(--colorTheme2);border-top-color:var(--colorTheme2);border-right-color:var(--colorTheme3);border-bottom-color: var(--colorTheme3);
+}
+
+
+/* input du titre */
+
+input.titre{
+    width: 500px; border: 2px solid black
+}
+h2{
+    margin-bottom: 50px;
+}
+h3{
+    margin-top: 80px;
+}
+
+
+
+
+
+/* LES BOUTONS */
+
+
+
+button{
+    width: 140px;
+    height: 30px;
+    border: none;
+    color: white;
+    padding: auto;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 2px 2px;
+    cursor: pointer;
+    border-radius: 10px 0px;
+}
+
+
+/* Normalizer */
+button.btnNormalize:hover{
+    color: black;
+    box-shadow: 5px 5px 7px gray;
+}
+
+button.btnNormalize{
+        background-color:var(--colorTheme2);
+         
+         
+}
+
+/* Clear */
+button.btnClear:hover{
+    color: black;
+    box-shadow: 5px 5px 7px gray;
+}
+
+button.btnClear{
+    background-color:var(--colorTheme1);
+     
+}
+
+
+
+
+/* Copy */
+button.btnCopy:hover{
+    color: black;
+    box-shadow: 5px 5px 7px gray;
+}
+
+
+button.btnCopy{
+    background-color:var(--colorTheme4);
+    font-size: 25px;
+    width: 140px;
+    height: 50px;
+    box-shadow: 5px 5px 7px gray;
+}
+
+button.btnCopy:active{
+    transform: scale(0.9);
+}
+
+
+/* DIV RESULTAT */
+
+div.divResultEnabled{
+    display: block;
+}
+
+div.divResultDisabled{
+    display: none;
+}
+
+/*Le texte du resultat*/
+p.resultat{
+    margin-left: 10px;margin-right: 10px;
+    padding-top: 10px;padding-bottom: 10px;
+    border:solid;border-radius: 10px;
+    font-weight: lighter;
+}
+p.resultatCopied{
+    margin-left: 10px;margin-right: 10px;
+    padding-top: 10px;padding-bottom: 10px;
+    border:solid;border-radius: 10px;
+    font-weight: bold;
+}
