@@ -76,28 +76,6 @@ button.btnClear{
 }
 
 
-
-
-/* Copy */
-button.btnCopy:hover{
-    color: black;
-    box-shadow: 5px 5px 7px gray;
-}
-
-
-button.btnCopy{
-    background-color:var(--colorTheme4);
-    font-size: 25px;
-    width: 140px;
-    height: 50px;
-    box-shadow: 5px 5px 7px gray;
-}
-
-button.btnCopy:active{
-    transform: scale(0.9);
-}
-
-
 /* DIV RESULTAT */
 
 div.divResultEnabled{
@@ -115,9 +93,16 @@ p.resultat{
     border:solid;border-radius: 10px;
     font-weight: lighter;
 }
-p.resultatCopied{
-    margin-left: 10px;margin-right: 10px;
-    padding-top: 10px;padding-bottom: 10px;
-    border:solid;border-radius: 10px;
-    font-weight: bold;
+
+
+/* Notification de copie */
+
+p.pNotifyDefault{
+    display: none;
+}
+
+p.pNotifyVisible{
+    color: red;
+    display: inline;
+    font-size: 25px;
 }
