@@ -14,6 +14,14 @@ const Formulaire = () => {
     //Pour modifier la notification du titre copié
     const [copiedNotifyClass,SetCopiedNotifyClass] = useState("pNotifyHidden");
     
+
+    //Array liste Catégorie
+    const  categoryList = [
+        "ACTIVITE","AIR","APPUI","BCOORD","BEG","BRAY","BRP","CAB","COAL","DEF","DHGS",
+        "DIVERS","DLA","DLF","DODCM","DPEL","GEND","MARINE","MEMOIRE","SIC","TERRE",
+        "G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14"
+    ];
+
     //Variabilisation
     var textResult = "";
     const nbreMaxCaractere=60;
@@ -124,7 +132,7 @@ const Formulaire = () => {
         SetCopiedNotifyClass("pNotifyHidden");
                 
     };
-    
+    console.log("chargement page")
     
 
 
@@ -139,41 +147,11 @@ const Formulaire = () => {
             <form action="">
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">
-                    <option value="ACTIVITE">ACTIVITE</option>
-                    <option value="AIR">AIR</option>
-                    <option value="APPUI">APPUI</option>
-                    <option value="BCOORD">BCOORD</option>
-                    <option value="BEG">BEG</option>
-                    <option value="BRAYO">BRAY</option>
-                    <option value="BRP">BRP</option>
-                    <option value="CAB">CAB</option>
-                    <option value="COAL">COAL</option>
-                    <option value="DEF">DEF</option>
-                    <option value="DHGS">DHGS</option>
-                    <option value="DIVERS">DIVERS</option>
-                    <option value="DLA">DLA</option>
-                    <option value="DLF">DLF</option>
-                    <option value="DODCM">DODCM</option>
-                    <option value="DPEL">DPEL</option>
-                    <option value="GEND">GEND</option>
-                    <option value="MARINE">MARINE</option>
-                    <option value="MEMOIRE">MEMOIRE</option>
-                    <option value="SIC">SIC</option>
-                    <option value="TERRE">TERRE</option>
-                    <option value="G01">G01</option>
-                    <option value="G02">G02</option>
-                    <option value="G03">G03</option>
-                    <option value="G04">G04</option>
-                    <option value="G05">G05</option>
-                    <option value="G06">G06</option>
-                    <option value="G07">G07</option>
-                    <option value="G08">G08</option>
-                    <option value="G09">G09</option>
-                    <option value="G10">G10</option>
-                    <option value="G11">G11</option>
-                    <option value="G12">G12</option>
-                    <option value="G13">G13</option>
-                    <option value="G14">G14</option>
+                    {categoryList.map((element, i) => {  
+                        console.log(element + " " +i)
+                        return <option key={i} value={element}>{element}</option>
+                        
+                    })}
                 </select>
             </form>
             {/* Input Title */}
@@ -188,15 +166,16 @@ const Formulaire = () => {
                 <button onClick={onClickNormalize} className="btnNormalize">Normaliser</button>
             </p>
 
-
+            {/* div resultat */}
             <div className={divResultValue}>
                 <p className='nomNormalise'>NORMALISÉ :</p>
                 <p ref={textResultRef} className="resultat">{textValue}</p>
                 <p className={copiedNotifyClass}>Copié !</p>
             </div>
-            
-
+                        
         </div>
+
+        
     );
 };
 
