@@ -9,16 +9,16 @@ const Formulaire = () => {
     const [textValue,setTextValue] = useState("");
 
     //Pour modifier l'affichage du bouton copie
-    const [divResultValue,setDivResultValue] = useState("divResultDisabled");
+    const [divResultValue,setDivResultValue] = useState("divResultHidden");
 
     //Pour modifier la notification du titre copié
-    const [copiedNotifyClass,SetCopiedNotifyClass] = useState("pNotifyDefault");
+    const [copiedNotifyClass,SetCopiedNotifyClass] = useState("pNotifyHidden");
     
     //Variabilisation
     var textResult = "";
     const nbreMaxCaractere=60;
    
-    //Reférence aux element des formulaire
+    //Reférence aux elements des formulaires
    const selecteurRef = useRef();
    const titreRef = useRef();
    const textResultRef = useRef();
@@ -27,16 +27,17 @@ const Formulaire = () => {
     // Comportement lorsque l'on tape dans l'input ou change la categorie
     //masque le précédent résultat si visible
     const onHandleChange = () =>{
-        if (divResultValue === "divResultEnabled") {
-            setDivResultValue("divResultDisabled");
+        if (divResultValue === "divResultVisible") {
+            setDivResultValue("divResultHidden");
         };
         if (copiedNotifyClass === "pNotifyVisible") {
-            SetCopiedNotifyClass("pNotifyDefault");
+            SetCopiedNotifyClass("pNotifyHidden");
         };
     };
 
 
-    // Comportements
+    // Process de normalisatio
+
     const onClickNormalize = () => {
        const categorie = selecteurRef.current.value;
         const titre = titreRef.current.value;
@@ -52,11 +53,15 @@ const Formulaire = () => {
         var regAccentA = new RegExp('[àâä]', 'gi'),
         regAccentE = new RegExp('[éèêë]', 'gi'),
         regCedille = new RegExp('[ç]', 'gi'),
+        regAccentI = new RegExp('[ïî]', 'gi'),
+        regAccentU = new RegExp('[ùûü]', 'gi'),
         regSpace = new RegExp(' ', 'gi');
         //Correction
         titreCorrect = titreCorrect.replace(regAccentA,"a");
         titreCorrect = titreCorrect.replace(regAccentE,"e");
         titreCorrect = titreCorrect.replace(regCedille,"c");
+        titreCorrect = titreCorrect.replace(regAccentI,"i");
+        titreCorrect = titreCorrect.replace(regAccentU,"u");
         titreCorrect = titreCorrect.replace(regSpace,"-");
 
          // 1 Lettre majuscule
@@ -93,14 +98,17 @@ const Formulaire = () => {
         
       //Set les STATES pour modifier l'affichage
         setTextValue(textResult);
-        setDivResultValue("divResultEnabled");
+        setDivResultValue("divResultVisible");
         
-        //Copie dans le clipboard avec un delai sinon pb
+        //Copie dans le clipboard avec un delai d'affichage
         setTimeout(() => {
             var toCopy = textResultRef.current.innerHTML;
             navigator.clipboard.writeText(toCopy);
             SetCopiedNotifyClass("pNotifyVisible");
         }, 500);
+
+        
+        
        
     };
 
@@ -108,12 +116,12 @@ const Formulaire = () => {
     //EFFACER
 
     const onClickClear = () => {
-        //efface le contenu de l'input titre
+        //efface le contenu de l'input
         titreRef.current.value="";
         //set les states pour reactualiser l'affichage
         setTextValue("");
-        setDivResultValue("divResultDisabled");
-        SetCopiedNotifyClass("pNotifyDefault");
+        setDivResultValue("divResultHidden");
+        SetCopiedNotifyClass("pNotifyHidden");
                 
     };
     
@@ -125,9 +133,9 @@ const Formulaire = () => {
         <div className='main'>
             < Header />
 
-            <h2>Normaliseur de nom de document</h2>
+            {/* <h2>Normalisez vos noms de documents</h2> */}
 
-            {/* Partie formulaire */}
+            {/* Form category */}
             <form action="">
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">
@@ -136,7 +144,7 @@ const Formulaire = () => {
                     <option value="APPUI">APPUI</option>
                     <option value="BCOORD">BCOORD</option>
                     <option value="BEG">BEG</option>
-                    <option value="BRAYO">BRAYO</option>
+                    <option value="BRAYO">BRAY</option>
                     <option value="BRP">BRP</option>
                     <option value="CAB">CAB</option>
                     <option value="COAL">COAL</option>
@@ -168,24 +176,23 @@ const Formulaire = () => {
                     <option value="G14">G14</option>
                 </select>
             </form>
-            {/* Partie texte */}
+            {/* Input Title */}
             <p>
-                <label htmlFor="">Titre : </label>
+                <label htmlFor="">NOM : </label>
                 <input className='titre' type="text" ref={titreRef} onChange={onHandleChange} maxLength={nbreMaxCaractere} placeholder={nbreMaxCaractere + " caractères maximum / Pas de caractères spéciaux !"} autoFocus=""/>
             </p>
             
-            {/* Bouton de validation */}
+            {/* Button*/}
             <p>
                 <button onClick={onClickClear} className="btnClear">Effacer</button>
                 <button onClick={onClickNormalize} className="btnNormalize">Normaliser</button>
             </p>
-            {/* Bouton reset */}
 
 
             <div className={divResultValue}>
-                <h3>Votre texte normalisé :</h3>
+                <p className='nomNormalise'>NORMALISÉ :</p>
                 <p ref={textResultRef} className="resultat">{textValue}</p>
-                <p className={copiedNotifyClass}>Texte copié !</p>
+                <p className={copiedNotifyClass}>Copié !</p>
             </div>
             
 

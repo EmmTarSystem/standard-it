@@ -1,18 +1,20 @@
 /* variable couleur */
 :root {
-    --colorTheme1:#CE6A6B;
+    --colorTheme1: #8aa1ba;
     --colorTheme2:#212E53;
     --colorTheme3:whitesmoke;
-    --colorTheme4:#4A919E;
+
     
 }
 
 /* div  */
 div.main{
 	margin: auto;
-	width: 700px;height: 600px;background-color: whitesmoke;text-align: center;
-	border:solid;border-width: 3px;border-radius: 20px;box-shadow: 5px 5px 5px var(--colorTheme1);
-	border-left-color:var(--colorTheme2);border-top-color:var(--colorTheme2);border-right-color:var(--colorTheme3);border-bottom-color: var(--colorTheme3);
+	width: 700px;height: 600px;background:linear-gradient(white, #bfc0c1);text-align: center;
+	border:solid;border-width: 3px;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px var(--colorTheme1);
+	border-left-color:var(--colorTheme2);border-top-color:var(--colorTheme2);border-right-color:var(--colorTheme2);border-bottom-color: var(--colorTheme2);
 }
 
 
@@ -21,11 +23,10 @@ div.main{
 input.titre{
     width: 500px; border: 2px solid black
 }
+
 h2{
     margin-bottom: 50px;
-}
-h3{
-    margin-top: 80px;
+    font-size: 15px;
 }
 
 
@@ -78,11 +79,11 @@ button.btnClear{
 
 /* DIV RESULTAT */
 
-div.divResultEnabled{
+div.divResultVisible{
     display: block;
 }
 
-div.divResultDisabled{
+div.divResultHidden{
     display: none;
 }
 
@@ -91,18 +92,25 @@ p.resultat{
     margin-left: 10px;margin-right: 10px;
     padding-top: 10px;padding-bottom: 10px;
     border:solid;border-radius: 10px;
-    font-weight: lighter;
+    border-color: var(--colorTheme1);
+    font-weight: bold;
+}
+
+p.nomNormalise{
+    margin-top: 80px;
 }
 
 
 /* Notification de copie */
 
-p.pNotifyDefault{
+p.pNotifyHidden{
     display: none;
 }
 
 p.pNotifyVisible{
-    color: red;
+    color: #d50100;
     display: inline;
     font-size: 25px;
 }
+
+

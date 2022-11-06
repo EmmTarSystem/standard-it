@@ -1,6 +1,6 @@
 import React from 'react';
 import './header.css';
-import image from './StandardMe_Alpha_small.png';
+import image from './Standard-It_V2_B.png';
 
 const Header = () => {
     return (
