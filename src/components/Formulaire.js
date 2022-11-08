@@ -1,19 +1,14 @@
 import React, { useRef, useState } from 'react';
 import './formulaire.css';
 import Header from './Header';
+import Result from './Result';
 
 const Formulaire = () => {
     //States 
 
     //Pour modifier l'affichage du titre normalisé
-    const [textValue,setTextValue] = useState("");
-
-    //Pour modifier l'affichage du bouton copie
-    const [divResultValue,setDivResultValue] = useState("divResultHidden");
-
-    //Pour modifier la notification du titre copié
-    const [copiedNotifyClass,SetCopiedNotifyClass] = useState("pNotifyHidden");
-    
+    const [textValue,setTextValue] = useState(["","divResultHidden"]);
+   
 
     //Array liste Catégorie
     const  categoryList = [
@@ -29,30 +24,16 @@ const Formulaire = () => {
     //Reférence aux elements des formulaires
    const selecteurRef = useRef();
    const titreRef = useRef();
-   const textResultRef = useRef();
 
 
-    // Comportement lorsque l'on tape dans l'input ou change la categorie
-    //masque le précédent résultat si visible
-    const onHandleChange = () =>{
-        if (divResultValue === "divResultVisible") {
-            setDivResultValue("divResultHidden");
-        };
-        if (copiedNotifyClass === "pNotifyVisible") {
-            SetCopiedNotifyClass("pNotifyHidden");
-        };
-    };
 
 
-    // Process de normalisatio
+
+    // Process de normalisation
 
     const onClickNormalize = () => {
        const categorie = selecteurRef.current.value;
         const titre = titreRef.current.value;
-
-
-
-
 
         //traitement du format orthographe du titre
         var titreCorrect = titre;
@@ -83,8 +64,8 @@ const Formulaire = () => {
             locAnnee = (locDateDuJour.getFullYear()),
             locMois = (locDateDuJour.getMonth() + 1),
             locJour = (locDateDuJour.getDate());
-        // traitement  du zero pour les dates inferieurs a 10
 
+        // traitement  du zero pour les dates inferieurs a 10
         if (locMois < 10) {
             locMois = ('0' + locMois);
         };
@@ -95,45 +76,43 @@ const Formulaire = () => {
 
         // simplification de la date
         var locDateFinale = ('' + locAnnee + locMois + locJour);
-    
-
-
 
 
         //Ecriture résultat finale
-        textResult = locDateFinale+"_NP_EDG_P30_"+categorie+"_"+titreCorrect;
-        
-        
-      //Set les STATES pour modifier l'affichage
-        setTextValue(textResult);
-        setDivResultValue("divResultVisible");
-        
-        //Copie dans le clipboard avec un delai d'affichage
-        setTimeout(() => {
-            var toCopy = textResultRef.current.innerHTML;
-            navigator.clipboard.writeText(toCopy);
-            SetCopiedNotifyClass("pNotifyVisible");
-        }, 500);
+        textResult = locDateFinale+"_NP_EDG_P30_"+categorie+"_"+titreCorrect;      
+      
 
+        //Copie dans le clipboard 
+        var toCopy = textResult;
+        navigator.clipboard.writeText(toCopy);
         
+        //Set les STATES pour modifier l'affichage
+        setTextValue([textResult,"divResultVisible"]);
         
        
     };
 
 
-    //EFFACER
+    // Comportement lorsque l'on tape dans l'input ou change la categorie
+    //masque le précédent résultat si visible
+    const onHandleChange = () =>{
+        if (textValue[1] === "divResultVisible") {
+            setTextValue(["","divResultHidden"])
+            
+        };
+    };
 
+
+    //EFFACER
     const onClickClear = () => {
         //efface le contenu de l'input
         titreRef.current.value="";
         //set les states pour reactualiser l'affichage
-        setTextValue("");
-        setDivResultValue("divResultHidden");
-        SetCopiedNotifyClass("pNotifyHidden");
-                
+        setTextValue(["","divResultHidden"]);
+        
     };
-    console.log("chargement page")
-    
+
+  
 
 
     //Render
@@ -141,16 +120,12 @@ const Formulaire = () => {
         <div className='main'>
             < Header />
 
-            {/* <h2>Normalisez vos noms de documents</h2> */}
-
             {/* Form category */}
             <form action="">
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">
                     {categoryList.map((element, i) => {  
-                        console.log(element + " " +i)
-                        return <option key={i} value={element}>{element}</option>
-                        
+                        return <option key={i} value={element}>{element}</option>    
                     })}
                 </select>
             </form>
@@ -166,12 +141,8 @@ const Formulaire = () => {
                 <button onClick={onClickNormalize} className="btnNormalize">Normaliser</button>
             </p>
 
-            {/* div resultat */}
-            <div className={divResultValue}>
-                <p className='nomNormalise'>NORMALISÉ :</p>
-                <p ref={textResultRef} className="resultat">{textValue}</p>
-                <p className={copiedNotifyClass}>Copié !</p>
-            </div>
+            {/* composant resultat */}
+            < Result toto={textValue[0]} divResultClass={textValue[1]} />
                         
         </div>
 
