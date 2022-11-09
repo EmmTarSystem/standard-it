@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/standard-it/static/css/main.ea37af8f.css",
+    "main.js": "/standard-it/static/js/main.474c4922.js",
+    "static/media/Standard-It_V2_B.png": "/standard-it/static/media/Standard-It_V2_B.fde5ea1d0654a1ac5bc2.png",
+    "index.html": "/standard-it/index.html",
+    "main.ea37af8f.css.map": "/standard-it/static/css/main.ea37af8f.css.map",
+    "main.474c4922.js.map": "/standard-it/static/js/main.474c4922.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ea37af8f.css",
+    "static/js/main.474c4922.js"
+  ]
+}
