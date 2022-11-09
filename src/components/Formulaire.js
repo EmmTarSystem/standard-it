@@ -6,8 +6,8 @@ import Result from './Result';
 const Formulaire = () => {
     //States 
 
-    //Pour modifier l'affichage du titre normalisé
-    const [textValue,setTextValue] = useState(["","divResultHidden"]);
+    //Pour modifier l'affichage du titre normalisé ["texte resulat", "class de la div resultat"]
+    const [resultValue,setResultValue] = useState(["","divResultHidden"]);
    
 
     //Array liste Catégorie
@@ -23,7 +23,7 @@ const Formulaire = () => {
    
     //Reférence aux elements des formulaires
    const selecteurRef = useRef();
-   const titreRef = useRef();
+   const inputTitleRef = useRef();
 
 
 
@@ -33,7 +33,7 @@ const Formulaire = () => {
 
     const onClickNormalize = () => {
        const categorie = selecteurRef.current.value;
-        const titre = titreRef.current.value;
+        const titre = inputTitleRef.current.value;
 
         //traitement du format orthographe du titre
         var titreCorrect = titre;
@@ -87,7 +87,7 @@ const Formulaire = () => {
         navigator.clipboard.writeText(toCopy);
         
         //Set les STATES pour modifier l'affichage
-        setTextValue([textResult,"divResultVisible"]);
+        setResultValue([textResult,"divResultVisible"]);
         
        
     };
@@ -96,8 +96,8 @@ const Formulaire = () => {
     // Comportement lorsque l'on tape dans l'input ou change la categorie
     //masque le précédent résultat si visible
     const onHandleChange = () =>{
-        if (textValue[1] === "divResultVisible") {
-            setTextValue(["","divResultHidden"])
+        if (resultValue[1] === "divResultVisible") {
+            setResultValue(["","divResultHidden"])
             
         };
     };
@@ -106,9 +106,9 @@ const Formulaire = () => {
     //EFFACER
     const onClickClear = () => {
         //efface le contenu de l'input
-        titreRef.current.value="";
+        inputTitleRef.current.value="";
         //set les states pour reactualiser l'affichage
-        setTextValue(["","divResultHidden"]);
+        setResultValue(["","divResultHidden"]);
         
     };
 
@@ -132,7 +132,7 @@ const Formulaire = () => {
             {/* Input Title */}
             <p>
                 <label htmlFor="">NOM : </label>
-                <input className='titre' type="text" ref={titreRef} onChange={onHandleChange} maxLength={nbreMaxCaractere} placeholder={nbreMaxCaractere + " caractères maximum / Pas de caractères spéciaux !"} autoFocus=""/>
+                <input className='titre' type="text" ref={inputTitleRef} onChange={onHandleChange} maxLength={nbreMaxCaractere} placeholder={nbreMaxCaractere + " caractères maximum / Pas de caractères spéciaux !"} autoFocus=""/>
             </p>
             
             {/* Button*/}
@@ -142,7 +142,7 @@ const Formulaire = () => {
             </p>
 
             {/* composant resultat */}
-            < Result toto={textValue[0]} divResultClass={textValue[1]} />
+            < Result textToDisplay={resultValue[0]} divResultClass={resultValue[1]} />
                         
         </div>
 

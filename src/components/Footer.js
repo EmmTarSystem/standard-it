@@ -5,7 +5,7 @@ const Footer = () => {
     
     return (
         <div className='footer'>
-            <p>EmmanuelT 2022-12 Release: 0.8.1</p>
+            <p>EmmTarSystem 2022-12 / Alpha Release: 0.8.1</p>
         </div>
     );
 };
