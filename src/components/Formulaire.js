@@ -1,22 +1,29 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import './formulaire.css';
 import Header from './Header';
 import Result from './Result';
+import axios from 'axios';
+
 
 const Formulaire = () => {
     //States 
 
+    //Pour récuperer les élément dans la bdd
+    const [allData,setAllData] = useState({});
+
     //Pour modifier l'affichage du titre normalisé ["texte resulat", "class de la div resultat"]
     const [resultValue,setResultValue] = useState(["","divResultHidden"]);
-   
 
-    //Array liste Catégorie
-    const  categoryList = [
-        "ACTIVITE","AIR","APPUI","BCOORD","BEG","BRAY","BRP","CAB","COAL","DEF","DHGS",
-        "DIVERS","DLA","DLF","DODCM","DPEL","GEND","MARINE","MEMOIRE","SIC","TERRE",
-        "G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14"
-    ];
 
+
+    // Recupere les infos dans la bdd json
+    useEffect(() => {
+            axios.get("./dataBase.json").then((res)=> {
+                setAllData(res.data[0]);
+            })
+            
+    },[]);
+    
     //Variabilisation
     var textResult = "";
     const nbreMaxCaractere=60;
@@ -32,7 +39,7 @@ const Formulaire = () => {
     // Process de normalisation
 
     const onClickNormalize = () => {
-       const categorie = selecteurRef.current.value;
+       const categorySelected = selecteurRef.current.value;
         const titre = inputTitleRef.current.value;
 
         //traitement du format orthographe du titre
@@ -57,8 +64,6 @@ const Formulaire = () => {
          titreCorrect = titreCorrect.charAt(0).toUpperCase() + titreCorrect.slice(1);
 
 
-
-
         //Traitement du format date 
         var locDateDuJour = new Date(),
             locAnnee = (locDateDuJour.getFullYear()),
@@ -79,7 +84,7 @@ const Formulaire = () => {
 
 
         //Ecriture résultat finale
-        textResult = locDateFinale+"_NP_EDG_P30_"+categorie+"_"+titreCorrect;      
+        textResult = locDateFinale+allData.nomenclature+categorySelected+"_"+titreCorrect;      
       
 
         //Copie dans le clipboard 
@@ -105,15 +110,23 @@ const Formulaire = () => {
 
     //EFFACER
     const onClickClear = () => {
-        //efface le contenu de l'input
-        inputTitleRef.current.value="";
-        //set les states pour reactualiser l'affichage
-        setResultValue(["","divResultHidden"]);
+        //clear uniquement si necessaire
+
+        if (inputTitleRef.current.value !== "" || resultValue[1] !== "divResultHidden") {
+            //efface le contenu de l'input
+            inputTitleRef.current.value="";
+            //set les states pour reactualiser l'affichage
+            setResultValue(["","divResultHidden"]);
+        }
+        
+        
         
     };
 
   
+    console.log("chargement formulaire");
 
+    
 
     //Render
     return (
@@ -124,7 +137,8 @@ const Formulaire = () => {
             <form action="">
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">
-                    {categoryList.map((element, i) => {  
+                    {/* ? = si déjà monté ou non */}
+                    {allData.categories?.map((element, i) => {  
                         return <option key={i} value={element}>{element}</option>    
                     })}
                 </select>
@@ -132,7 +146,7 @@ const Formulaire = () => {
             {/* Input Title */}
             <p>
                 <label htmlFor="">NOM : </label>
-                <input className='titre' type="text" ref={inputTitleRef} onChange={onHandleChange} maxLength={nbreMaxCaractere} placeholder={nbreMaxCaractere + " caractères maximum / Pas de caractères spéciaux !"} autoFocus=""/>
+                <input className='titre' type="text" ref={inputTitleRef} onChange={onHandleChange} maxLength={nbreMaxCaractere} placeholder={nbreMaxCaractere + " caractères maximum / Pas de caractères spéciaux !"} autoFocus={true}/>
             </p>
             
             {/* Button*/}
