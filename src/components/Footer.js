@@ -5,7 +5,7 @@ const Footer = () => {
     
     return (
         <div className='footer'>
-            <p>EmmTarSystem 2022-12 / Alpha Release: 0.8.1</p>
+            <p>EmmTarSystem 2022-12 / Alpha Release: 0.9.0</p>
         </div>
     );
 };

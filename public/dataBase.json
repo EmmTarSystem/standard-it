@@ -10,5 +10,15 @@
         "organisme":"BALARD",
         "categories":["CPCO","J3","EMOT"],
         "nomenclature":"_DR_BALARD_"
+    },
+    {
+        "organisme":"GSBDD",
+        "categories":["TRANSPORT","DID","FOCH"],
+        "nomenclature":"_NP_GSBDD_"
+    },
+    {
+        "organisme":"3RIMA",
+        "categories":["1CIE","2CIE","3CIE","ETAT-MAJOR"],
+        "nomenclature":"_DR_3RIMA_"
     }
 ]

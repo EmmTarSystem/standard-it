@@ -1,15 +1,18 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import './formulaire.css';
 import Header from './Header';
 import Result from './Result';
-import axios from 'axios';
 
 
-const Formulaire = () => {
-    //States 
+
+const Formulaire = (props) => {
+    
+    const categoryOrganisme = props.categoryOrganisme; 
+    const nomenclature = props.nomenclatureOrganisme;
+
 
     //Pour récuperer les élément dans la bdd
-    const [allData,setAllData] = useState({});
+    // const [allData,setAllData] = useState({});
 
     //Pour modifier l'affichage du titre normalisé ["texte resulat", "class de la div resultat"]
     const [resultValue,setResultValue] = useState(["","divResultHidden"]);
@@ -17,12 +20,12 @@ const Formulaire = () => {
 
 
     // Recupere les infos dans la bdd json
-    useEffect(() => {
-            axios.get("./dataBase.json").then((res)=> {
-                setAllData(res.data[0]);
-            })
+    // useEffect(() => {
+    //         axios.get("./dataBase.json").then((res)=> {
+    //             setAllData(res.data[0]);
+    //         })
             
-    },[]);
+    // },[]);
     
     //Variabilisation
     var textResult = "";
@@ -84,7 +87,7 @@ const Formulaire = () => {
 
 
         //Ecriture résultat finale
-        textResult = locDateFinale+allData.nomenclature+categorySelected+"_"+titreCorrect;      
+        textResult = locDateFinale+nomenclature+categorySelected+"_"+titreCorrect;      
       
 
         //Copie dans le clipboard 
@@ -138,7 +141,7 @@ const Formulaire = () => {
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">
                     {/* ? = si déjà monté ou non */}
-                    {allData.categories?.map((element, i) => {  
+                    {categoryOrganisme.map((element, i) => {  
                         return <option key={i} value={element}>{element}</option>    
                     })}
                 </select>
