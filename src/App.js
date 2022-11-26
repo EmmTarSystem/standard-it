@@ -1,6 +1,7 @@
 import './components/app.css';
 import Formulaire from './components/Formulaire';
 import Footer from './components/Footer';
+import Header from './components/Header';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SelectOrganisme from './components/SelectOrganisme';
@@ -11,7 +12,7 @@ function App() {
 //Verification presence choix organisme (cookies)
 
 const [organismeData,setOrganismeData] = useState([]);
-var cookiesOrganisme=localStorage.getItem("standard-it");
+var cookiesOrganisme=localStorage.getItem("standard-it organisme");
 
 // Recupere les infos dans la bdd json
 useEffect(() => {
@@ -52,7 +53,11 @@ if (cookiesOrganisme!==null  && organismeData.length > 0) {
 
   return (
     <div>
-      <Formulaire categoryOrganisme={organismeData[0].categories} nomenclatureOrganisme={organismeData[0].nomenclature} />
+      <div className='main'>
+        <Header />
+        <Formulaire categoryOrganisme={organismeData[0].categories} nomenclatureOrganisme={organismeData[0].nomenclature} mentionOrganisme={organismeData[0].mention}/>
+      </div>
+      
       <Footer />
     </div>
   )
@@ -65,8 +70,12 @@ if (cookiesOrganisme===null){
   console.log("pas d'organisme de définit / Affiche Choix Organisme")
   return(
     <div>
-      {/* le props permet de recupere les éléments depuis le child */}
-      <SelectOrganisme setOrganismeData={setOrganismeData} />
+      <div className='main'>
+        <Header />
+        {/* le props permet de recupere les éléments depuis le child */}
+        <SelectOrganisme setOrganismeData={setOrganismeData} />
+      </div>
+      
       <Footer />
     </div>
   )

@@ -4,19 +4,16 @@
     --colorTheme2:#212E53;
     --colorTheme3:whitesmoke;
 
+    /* Mention */
+    --widthDivMention:200px;
+    --borderRadiusDivMention:5px;
+    --marginBottomDivMention:20px;
+    --NPColor:white;
+    --DRColor:rgb(244, 231, 115);
+    --CDColor:rgb(99, 244, 171);
+    --SDColor:rgb(245, 118, 96);
     
 }
-
-/* div  */
-div.main{
-	margin: auto;
-	width: 700px;height: 600px;background:linear-gradient(white, #bfc0c1);text-align: center;
-	border:solid;border-width: 3px;
-    border-radius: 20px;
-    box-shadow: 3px 3px 3px var(--colorTheme1);
-	border-left-color:var(--colorTheme2);border-top-color:var(--colorTheme2);border-right-color:var(--colorTheme2);border-bottom-color: var(--colorTheme2);
-}
-
 
 /* input du titre */
 
@@ -77,3 +74,44 @@ button.btnClear{
 }
 
 
+
+/* Les div de chaque mention */
+div.localDivMentionClass{
+    display: inline;
+}
+
+
+/* MENTION */
+
+/* Div du composant */
+div.globalDivMentionClassNP{
+    background-color:var(--NPColor);
+    width: var(--widthDivMention);
+    border-radius: var(--borderRadiusDivMention);
+    margin: auto;
+    margin-bottom: var(--marginBottomDivMention);
+}
+
+div.globalDivMentionClassDR{
+    background-color:var(--DRColor);
+    width: var(--widthDivMention);
+    border-radius: var(--borderRadiusDivMention);
+    margin: auto;
+    margin-bottom: var(--marginBottomDivMention);
+}
+
+div.globalDivMentionClassCD{
+    background-color:var(--CDColor);
+    width: var(--widthDivMention);
+    border-radius: var(--borderRadiusDivMention);
+    margin: auto;
+    margin-bottom: var(--marginBottomDivMention);
+}
+
+div.globalDivMentionClassSD{
+    background-color:var(--SDColor);
+    width: var(--widthDivMention);
+    border-radius: var(--borderRadiusDivMention);
+    margin: auto;
+    margin-bottom: var(--marginBottomDivMention);
+}

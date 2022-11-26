@@ -1,24 +1,32 @@
 [
     {
         "organisme":"EDG",
+        "nomenclature":"_EDG_P30_",
+        "mention":["NP","DR"],
         "categories":["ACTIVITE","AIR","APPUI","BCOORD","BEG","BRAY","BRP","CAB","COAL","DEF","DHGS",
         "DIVERS","DLA","DLF","DODCM","DPEL","GEND","MARINE","MEMOIRE","SIC","TERRE",
-        "G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14"],
-        "nomenclature":"_NP_EDG_P30_"
+        "G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14"]
+        
     },
     {
         "organisme":"BALARD",
-        "categories":["CPCO","J3","EMOT"],
-        "nomenclature":"_DR_BALARD_"
+        "nomenclature":"_BALARD_",
+        "mention":["NP","DR","CD","SD"],
+        "categories":["CPCO","J3","EMOT"]
+        
     },
     {
         "organisme":"GSBDD",
-        "categories":["TRANSPORT","DID","FOCH"],
-        "nomenclature":"_NP_GSBDD_"
+        "nomenclature":"_GSBDD_",
+        "mention":["NP","DR"],
+        "categories":["TRANSPORT","DID","FOCH"]
+        
     },
     {
         "organisme":"3RIMA",
-        "categories":["1CIE","2CIE","3CIE","ETAT-MAJOR"],
-        "nomenclature":"_DR_3RIMA_"
+        "nomenclature":"_3RIMA_",
+        "mention":["NP","DR","CD"],
+        "categories":["1CIE","2CIE","3CIE","ETAT-MAJOR"]
+       
     }
 ]

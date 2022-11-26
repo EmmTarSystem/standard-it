@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import './formulaire.css';
-import Header from './Header';
 import Result from './Result';
 
 
@@ -9,23 +8,27 @@ const Formulaire = (props) => {
     
     const categoryOrganisme = props.categoryOrganisme; 
     const nomenclature = props.nomenclatureOrganisme;
-
-
-    //Pour récuperer les élément dans la bdd
-    // const [allData,setAllData] = useState({});
+    const allMentionArray = props.mentionOrganisme;
 
     //Pour modifier l'affichage du titre normalisé ["texte resulat", "class de la div resultat"]
     const [resultValue,setResultValue] = useState(["","divResultHidden"]);
 
 
+    //Mention
+    
+    const [mention,setMention] = useState("NP");
 
-    // Recupere les infos dans la bdd json
-    // useEffect(() => {
-    //         axios.get("./dataBase.json").then((res)=> {
-    //             setAllData(res.data[0]);
-    //         })
-            
-    // },[]);
+
+    var globalDivMentionClass="globalDivMentionClass"+mention;
+
+
+    const onChangeMention = (e)=>{
+        // Set la mention pour reactualisation et clear l'affichage
+        setMention(e);
+        onHandleChange();
+    }
+
+
     
     //Variabilisation
     var textResult = "";
@@ -48,20 +51,19 @@ const Formulaire = (props) => {
         //traitement du format orthographe du titre
         var titreCorrect = titre;
                 
-        // Ecriture des motifs à rempalcer
-        var regAccentA = new RegExp('[àâä]', 'gi'),
-        regAccentE = new RegExp('[éèêë]', 'gi'),
-        regCedille = new RegExp('[ç]', 'gi'),
-        regAccentI = new RegExp('[ïî]', 'gi'),
-        regAccentU = new RegExp('[ùûü]', 'gi'),
-        regSpace = new RegExp(' ', 'gi');
+        // Tableau motifs à rempalcer
+        const correctionRef = [
+            [/[éèêë]/gi,"e"],
+            [/[àâä]/gi,"a"],
+            [/[ç]/gi,"c"],
+            [/[ïî]/gi,"i"],
+            [/[ùûü]/gi,"u"],
+            [/ /gi,"-"]
+          ];
         //Correction
-        titreCorrect = titreCorrect.replace(regAccentA,"a");
-        titreCorrect = titreCorrect.replace(regAccentE,"e");
-        titreCorrect = titreCorrect.replace(regCedille,"c");
-        titreCorrect = titreCorrect.replace(regAccentI,"i");
-        titreCorrect = titreCorrect.replace(regAccentU,"u");
-        titreCorrect = titreCorrect.replace(regSpace,"-");
+        for(let i = 0; i < correctionRef.length; i++){
+            titreCorrect = titreCorrect.replace(correctionRef[i][0],correctionRef[i][1])
+          };
 
          // 1 Lettre majuscule
          titreCorrect = titreCorrect.charAt(0).toUpperCase() + titreCorrect.slice(1);
@@ -87,7 +89,7 @@ const Formulaire = (props) => {
 
 
         //Ecriture résultat finale
-        textResult = locDateFinale+nomenclature+categorySelected+"_"+titreCorrect;      
+        textResult = locDateFinale+"_"+mention+nomenclature+categorySelected+"_"+titreCorrect;      
       
 
         //Copie dans le clipboard 
@@ -133,10 +135,22 @@ const Formulaire = (props) => {
 
     //Render
     return (
-        <div className='main'>
-            < Header />
+        // Mention
+        <div>
+            <div className={globalDivMentionClass}>
+                <form action="" >
+                    {allMentionArray.map(
+                    (element,i)=>{
+                        return <div className='localDivMentionClass' key={i}>
+                        <input type="radio" name='classification' onChange={()=>onChangeMention(element)} key={i} value={element} id={element} checked={element===mention}/>
+                        <label htmlFor={element}>{element}</label>
+                        </div>
 
-            {/* Form category */}
+                    }
+                    )}
+                </form>
+            </div>
+            {/* Formulaire category */}
             <form action="">
                 <label htmlFor="">CATEGORIE : </label>
                 <select ref={selecteurRef} onChange={onHandleChange} name="" id="">

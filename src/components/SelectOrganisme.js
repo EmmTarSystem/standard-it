@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react';
-import Header from './Header';
 import axios from 'axios';
 import './selectOrganisme.css'
 
@@ -31,7 +30,7 @@ const SelectOrganisme = ({setOrganismeData}) => {
         console.log("Organisme choisit : " + userChoice);
 
         //set les cookies selon le choix
-        localStorage.setItem("standard-it",userChoice);
+        localStorage.setItem("standard-it organisme",userChoice);
 
 
         //recupère les data de l'organisme
@@ -51,8 +50,8 @@ const SelectOrganisme = ({setOrganismeData}) => {
 
     return (
 
-        <div className='main'>
-            <Header />
+        <div>
+            
 
             {/* Form category */}
             <form action="">
