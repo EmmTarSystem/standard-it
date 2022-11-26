@@ -1,0 +1,32 @@
+[
+    {
+        "organisme":"EDG",
+        "nomenclature":"_EDG_P30_",
+        "mention":["NP","DR"],
+        "categories":["ACTIVITE","AIR","APPUI","BCOORD","BEG","BRAY","BRP","CAB","COAL","DEF","DHGS",
+        "DIVERS","DLA","DLF","DODCM","DPEL","GEND","MARINE","MEMOIRE","SIC","TERRE",
+        "G01","G02","G03","G04","G05","G06","G07","G08","G09","G10","G11","G12","G13","G14"]
+        
+    },
+    {
+        "organisme":"BALARD",
+        "nomenclature":"_BALARD_",
+        "mention":["NP","DR","CD","SD"],
+        "categories":["CPCO","J3","EMOT"]
+        
+    },
+    {
+        "organisme":"GSBDD",
+        "nomenclature":"_GSBDD_",
+        "mention":["NP","DR"],
+        "categories":["TRANSPORT","DID","FOCH"]
+        
+    },
+    {
+        "organisme":"3RIMA",
+        "nomenclature":"_3RIMA_",
+        "mention":["NP","DR","CD"],
+        "categories":["1CIE","2CIE","3CIE","ETAT-MAJOR"]
+       
+    }
+]
