@@ -5,14 +5,14 @@
     --colorTheme3:whitesmoke;
 
     /* Mention */
-    --widthDivMention:200px;
+    --widthDivMention:300px;
     --borderRadiusDivMention:5px;
     --marginBottomDivMention:20px;
     --NPColor:white;
     --DRColor:rgb(244, 231, 115);
-    --CDColor:rgb(99, 244, 171);
-    --SDColor:rgb(245, 118, 96);
-    
+    --DR-SFColor:rgb(141, 230, 168);
+    --SColor:rgb(248, 132, 111);
+    --S-SFColor:rgb(74, 74, 74);
 }
 
 /* input du titre */
@@ -78,6 +78,7 @@ button.btnClear{
 /* Les div de chaque mention */
 div.localDivMentionClass{
     display: inline;
+    margin-right: 10px;
 }
 
 
@@ -100,18 +101,30 @@ div.globalDivMentionClassDR{
     margin-bottom: var(--marginBottomDivMention);
 }
 
-div.globalDivMentionClassCD{
-    background-color:var(--CDColor);
+div.globalDivMentionClassDR-SF{
+    background-color:var(--DR-SFColor);
     width: var(--widthDivMention);
     border-radius: var(--borderRadiusDivMention);
     margin: auto;
     margin-bottom: var(--marginBottomDivMention);
 }
 
-div.globalDivMentionClassSD{
-    background-color:var(--SDColor);
+
+
+div.globalDivMentionClassS{
+    background-color:var(--SColor);
     width: var(--widthDivMention);
     border-radius: var(--borderRadiusDivMention);
     margin: auto;
     margin-bottom: var(--marginBottomDivMention);
+   
+}
+
+div.globalDivMentionClassS-SF{
+    background-color:var(--S-SFColor);
+    width: var(--widthDivMention);
+    border-radius: var(--borderRadiusDivMention);
+    margin: auto;
+    margin-bottom: var(--marginBottomDivMention);
+    color: white;
 }

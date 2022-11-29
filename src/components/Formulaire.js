@@ -23,6 +23,7 @@ const Formulaire = (props) => {
 
 
     const onChangeMention = (e)=>{
+        console.log("Changement de la mention pour = " + e);
         // Set la mention pour reactualisation et clear l'affichage
         setMention(e);
         onHandleChange();
@@ -45,6 +46,7 @@ const Formulaire = (props) => {
     // Process de normalisation
 
     const onClickNormalize = () => {
+        console.log("clic normaliser")
        const categorySelected = selecteurRef.current.value;
         const titre = inputTitleRef.current.value;
 
@@ -71,21 +73,16 @@ const Formulaire = (props) => {
 
         //Traitement du format date 
         var locDateDuJour = new Date(),
-            locAnnee = (locDateDuJour.getFullYear()),
-            locMois = (locDateDuJour.getMonth() + 1),
-            locJour = (locDateDuJour.getDate());
+            year = (locDateDuJour.getFullYear()),
+            tempMonth = (locDateDuJour.getMonth() + 1),
+            tempDay = (locDateDuJour.getDate());
 
-        // traitement  du zero pour les dates inferieurs a 10
-        if (locMois < 10) {
-            locMois = ('0' + locMois);
-        };
-
-        if (locJour < 10) {
-          locJour = ('0' + locJour);
-        };
+        // traitement format 2 digits
+        var finalMonth =(tempMonth < 10 ? "0" + tempMonth : tempMonth);
+        var finalDay =(tempDay < 10 ? "0" + tempDay : tempDay);
 
         // simplification de la date
-        var locDateFinale = ('' + locAnnee + locMois + locJour);
+        var locDateFinale = ('' +   year + finalMonth + finalDay);
 
 
         //Ecriture résultat finale
@@ -95,7 +92,7 @@ const Formulaire = (props) => {
         //Copie dans le clipboard 
         var toCopy = textResult;
         navigator.clipboard.writeText(toCopy);
-        
+        console.log("Text copié dans le clipboard = " + toCopy);
         //Set les STATES pour modifier l'affichage
         setResultValue([textResult,"divResultVisible"]);
         
@@ -116,12 +113,15 @@ const Formulaire = (props) => {
     //EFFACER
     const onClickClear = () => {
         //clear uniquement si necessaire
-
+        console.log("Clic Effacer")
         if (inputTitleRef.current.value !== "" || resultValue[1] !== "divResultHidden") {
             //efface le contenu de l'input
             inputTitleRef.current.value="";
             //set les states pour reactualiser l'affichage
+            console.log("Effacement effectué")
             setResultValue(["","divResultHidden"]);
+        }else{
+            console.log("Rien à effacer")
         }
         
         

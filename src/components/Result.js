@@ -10,7 +10,7 @@ const Result = (props) => {
         <div className={props.divResultClass}>
             <p className='nomNormalise'>NORMALISÉ :</p>
             <p  className="resultat">{props.textToDisplay}</p>
-            <p className="pCopyNotify">Copié !</p>
+            <p className="pCopyNotify">COPIÉ !</p>
         </div>
     );
 };

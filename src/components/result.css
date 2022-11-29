@@ -28,9 +28,9 @@ p.nomNormalise{
 
 
 p.pCopyNotify{
-    color: #d50100;
+    color: var(--colorTheme2);
     display: inline;
-    font-size: 25px;
+    font-size: 18px;
 }
 
 
